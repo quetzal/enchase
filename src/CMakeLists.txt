@@ -1,0 +1,8 @@
+__files_group(${CMAKE_CURRENT_SOURCE_DIR}/enchase/ SRCS)
+
+set(LIBS trimesh2 Qt5::Core Qt5::Gui qtuser_core)
+
+__add_real_target(enchase lib SOURCE ${SRCS} INC ${INCS} LIB ${LIBS} DEF ${DEFS})
+
+INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/enchase DESTINATION include/ FILES_MATCHING PATTERN "*.h")
+set_property(TARGET enchase PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR})
