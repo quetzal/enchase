@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <memory>
 #include <math.h>
+#include<string.h>
 
 namespace enchase
 {

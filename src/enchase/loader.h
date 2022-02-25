@@ -1,7 +1,7 @@
 #ifndef ENCHASE_LOADER_1600318223169_H
 #define ENCHASE_LOADER_1600318223169_H
 #include "trimesh2/Vec.h"
-#include "ImageMatrix.h"
+#include "imagematrix.h"
 #include <vector>
 #include <QString>
 
