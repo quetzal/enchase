@@ -10,11 +10,14 @@ namespace enchase
 			return nullptr;
 
 		trimesh::TriMesh* mesh = new trimesh::TriMesh();
+		mesh->flags.clear();
 		int vertexNum = (width + 1) * (height + 1) + 2 * (width + height);
 		int triangleNum = 2 * width * height + 4 * (width + height) + 2 * width;
 		mesh->vertices.resize(vertexNum);
 		mesh->normals.resize(vertexNum);
 		mesh->faces.resize(triangleNum);
+
+		int vertex_index = 0;
 
 		for (int i = 0; i <= height; ++i)
 		{
@@ -26,6 +29,12 @@ namespace enchase
 				float x = (float)j * pixel;
 				mesh->normals.at(index) = trimesh::vec3(0.0f, 0.0f, 1.0f);
 				mesh->vertices.at(index) = trimesh::vec3(x, y, h);
+
+				if ((i == 0 || i == height) && (j == 0 || j == width))
+				{
+					mesh->flags.push_back(vertex_index);
+				}
+				vertex_index++;
 			}
 		}
 
@@ -68,6 +77,12 @@ namespace enchase
 
 				float x = (float)i * pixel;
 				mesh->vertices.at(vindex++) = trimesh::vec3(x, y1, 0.0f);
+
+				if (i == 0 || i == width)
+				{
+					mesh->flags.push_back(vertex_index);
+				}
+				vertex_index++;
 			}
 		}
 
@@ -88,6 +103,12 @@ namespace enchase
 
 				float y = (float)i * pixel;
 				mesh->vertices.at(vindex++) = trimesh::vec3(x, y, 0.0f);
+
+				if (i == 0 || i == height)
+				{
+					mesh->flags.push_back(vertex_index);
+				}
+				vertex_index++;
 			}
 		}
 
@@ -109,6 +130,12 @@ namespace enchase
 
 				float x = tx - (float)i * pixel;
 				mesh->vertices.at(vindex++) = trimesh::vec3(x, y, 0.0f);
+
+				if (i == 0 || i == width)
+				{
+					mesh->flags.push_back(vertex_index);
+				}
+				vertex_index++;
 			}
 		}
 
@@ -132,6 +159,12 @@ namespace enchase
 
 				float y = ty - (float)i * pixel;
 				mesh->vertices.at(vindex++) = trimesh::vec3(x, y, 0.0f);
+
+				if (i == 0 || i == height)
+				{
+					mesh->flags.push_back(vertex_index);
+				}
+				vertex_index++;
 			}
 		}
 
