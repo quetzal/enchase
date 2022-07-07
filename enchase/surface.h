@@ -4,7 +4,7 @@
 #include <string>
 #include "imagematrix.h"
 #include "enum.h"
-#include "qtusercore/module/progressor.h"
+#include "ccglobal/tracer.h"
 
 namespace enchase
 {
@@ -14,12 +14,12 @@ namespace enchase
 		Surface();
 		virtual ~Surface();
 
-		MatrixF* matrix(qtuser_core::Progressor* progressor);
+		MatrixF* matrix(ccglobal::Tracer* tracer);
 		virtual MatrixF* produce() = 0;
 		void setIndex(int index);
 		int index();
 	protected:
-		void process(MatrixF* matrix, qtuser_core::Progressor* progressor);
+		void process(MatrixF* matrix, ccglobal::Tracer* tracer);
 	public:
 		int convertType;
 		float baseHeight;

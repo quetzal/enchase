@@ -27,14 +27,14 @@ namespace enchase
 			return;
 
 		size_t size = texture->m_indexes.size();
-		int vertexSize = (int)dest->vertices.size();
+		unsigned vertexSize = (unsigned)dest->vertices.size();
 		for (size_t i = 0; i < size; ++i)
 		{
-			int index = texture->m_indexes.at(i);
-			if (index >= 0 && index < vertexSize)
+			unsigned _index = texture->m_indexes.at(i);
+			if (_index >= 0 && _index < vertexSize)
 			{
-				trimesh::vec3& p = dest->vertices.at(index);
-				trimesh::vec3& n = dest->normals.at(index);
+				trimesh::vec3& p = dest->vertices.at(_index);
+				trimesh::vec3& n = dest->normals.at(_index);
 				trimesh::vec2& xy = texture->m_texcoord.at(i);
 
 				float t = 0.0f;

@@ -2,9 +2,9 @@
 
 namespace enchase
 {
-	void blur(MatrixF* matrix, int blurNum, qtuser_core::Progressor* progressor)
+	void blur(MatrixF* matrix, int blurNum, ccglobal::Tracer* tracer)
 	{
-		MatrixF f(3, 3, 1, 1.0 / 9.0);
+		MatrixF f(3, 3, 1, 1.0f / 9.0f);
 		MatrixF* matrix2 = new MatrixF(*matrix);
 
 		int i = 0;
@@ -13,9 +13,9 @@ namespace enchase
 			matrix->conv(f, MatrixF::PAD_EDGE, *matrix2);
 			matrix2->conv(f, MatrixF::PAD_EDGE, *matrix);
 
-			if (progressor != nullptr)
+			if (tracer != nullptr)
 			{
-				progressor->progress(0.3f + 0.5f / blurNum * (i+1));
+				tracer->progress(0.3f + 0.5f / blurNum * (i+1));
 			}
 		}
 		if (i < blurNum)
@@ -23,9 +23,9 @@ namespace enchase
 			matrix->conv(f, MatrixF::PAD_EDGE, *matrix2);
 			*matrix = *matrix2;
 
-			if (progressor != nullptr)
+			if (tracer != nullptr)
 			{
-				progressor->progress(0.3f + 0.5f / blurNum * (i + 1));
+				tracer->progress(0.3f + 0.5f / blurNum * (i + 1));
 			}
 		}
 

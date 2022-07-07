@@ -1,9 +1,13 @@
-cmake_minimum_required(VERSION 3.1)
+__files_group(${CMAKE_CURRENT_SOURCE_DIR}/enchase/ SRCS)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/")
-include(ConfigureAllModules) 
+set(LIBS trimesh2)
 
-project(enchase)
-add_subdirectory(src)
+__add_real_target(enchase lib SOURCE ${SRCS} 
+							  LIB ${LIBS}
+							  DEF ${DEFS}
+							  INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+							  )
 
-__configure_all()
+if(CC_INSTALL_ENCHASE)
+	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR} enchase)
+endif()

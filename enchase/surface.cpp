@@ -23,12 +23,12 @@ namespace enchase
 
 	}
 
-	void Surface::process(MatrixF* matrix, qtuser_core::Progressor* progressor)
+	void Surface::process(MatrixF* matrix, ccglobal::Tracer* tracer)
 	{
 		edgeProcess(matrix, edgeType);
-		if (progressor != nullptr)
+		if (tracer != nullptr)
 		{
-			progressor->progress(0.2f);
+			tracer->progress(0.2f);
 		}
 
 		if (invert)
@@ -36,14 +36,14 @@ namespace enchase
 			printf("invert\n");
 			*matrix = 1 - *matrix;
 		}
-		if (progressor != nullptr)
+		if (tracer != nullptr)
 		{
-			progressor->progress(0.3f);
+			tracer->progress(0.3f);
 		}
 
 		if (useBlur > 0)
 		{
-			blur(matrix, useBlur, progressor);
+			blur(matrix, useBlur, tracer);
 		}
 
 		if (convertType == 1)
@@ -54,20 +54,20 @@ namespace enchase
 		{
 			normalConvert(matrix, baseHeight, maxHeight);
 		}
-		if (progressor != nullptr)
+		if (tracer != nullptr)
 		{
-			progressor->progress(0.9f);
+			tracer->progress(0.9f);
 		}
 	}
 
-	MatrixF* Surface::matrix(qtuser_core::Progressor* progressor)
+	MatrixF* Surface::matrix(ccglobal::Tracer* tracer)
 	{
 		MatrixF* m = produce();
-		if (progressor != nullptr)
+		if (tracer != nullptr)
 		{
-			progressor->progress(0.1f);
+			tracer->progress(0.1f);
 		}
-		if(m) process(m, progressor);
+		if(m) process(m, tracer);
 		return m;
 	}
 
