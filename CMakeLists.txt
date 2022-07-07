@@ -9,5 +9,5 @@ __add_real_target(enchase lib SOURCE ${SRCS}
 							  )
 
 if(CC_INSTALL_ENCHASE)
-	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR} enchase)
+	__install_directory_specif(${CMAKE_CURRENT_SOURCE_DIR}/ enchase)
 endif()
