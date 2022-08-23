@@ -2,6 +2,10 @@ __files_group(${CMAKE_CURRENT_SOURCE_DIR}/enchase/ SRCS)
 
 set(LIBS trimesh2)
 
+if(WIN32)
+	list(APPEND DEFS _USE_MATH_DEFINES)
+endif()
+
 __add_real_target(enchase lib SOURCE ${SRCS} 
 							  LIB ${LIBS}
 							  DEF ${DEFS}

@@ -27,7 +27,7 @@ namespace enchase
 			PAD_REFLECT,  // 反射填充
 		};
 
-	protected:
+	public:
 		uint m_width;
 		uint m_height;
 		uint m_depth;
@@ -450,6 +450,128 @@ namespace enchase
 			return 0;
 		}
 
+		template<class F>
+		int conv(const Matrix<F>& convm, PADDING pad, Matrix& outm) const
+		{
+			if (m_depth != 1 || convm.m_depth != 1)
+			{
+				return -1;
+			}
+
+			int i, j, i1, j1, pos1, pos2;
+			int h1, w1, h2, w2, ch, cw;
+			double summ;
+
+			//变量初始化
+			h1 = m_height;
+			w1 = m_width;
+
+			h2 = convm.m_height;    // 传递 图像矩阵数据 convm
+			w2 = convm.m_width;
+			//printf("h2=%d,w2=%d ", h2, w2);    // h2 = 3,w2 = 3   
+
+			//矩阵 f2 的中心
+			ch = (h2 - 1) / 2;
+			cw = (w2 - 1) / 2;
+			//printf("ch=%d,cw=%d ", ch, cw);   // ch = 1,cw = 1 
+
+
+			for (i = 0; i < h1; i++)
+			{
+				for (j = 0; j < w1; j++)
+				{
+					summ = 0;
+					for (i1 = 0; i1 < h2; i1++)
+					{
+						for (j1 = 0; j1 < w2; j1++)
+						{
+							//计算对应的 f1 坐标
+							pos1 = i + i1 - ch;
+							pos2 = j + j1 - cw;
+
+							T d;
+							bool set_zero = false;
+
+							if (pos1 < 0)
+							{
+								switch (pad)
+								{
+								case PAD_ZERO:
+									d = (T)(0);
+									set_zero = true;
+									break;
+								case PAD_EDGE:
+									pos1 = 0;
+									break;
+								case PAD_REFLECT:
+									pos1 = -1 - pos1;
+									break;
+								}
+							}
+							else if (pos1 >= h1)
+							{
+								switch (pad)
+								{
+								case PAD_ZERO:
+									d = (T)(0);
+									set_zero = true;
+									break;
+								case PAD_EDGE:
+									pos1 = h1 - 1;
+									break;
+								case PAD_REFLECT:
+									pos1 = (h1 - 1) - (pos1 - h1);
+									break;
+								}
+							}
+
+							if (pos2 < 0)
+							{
+								switch (pad)
+								{
+								case PAD_ZERO:
+									d = (T)(0);
+									set_zero = true;
+									break;
+								case PAD_EDGE:
+									pos2 = 0;
+									break;
+								case PAD_REFLECT:
+									pos2 = -1 - pos2;
+									break;
+								}
+							}
+							else if (pos2 >= w1)
+							{
+								switch (pad)
+								{
+								case PAD_ZERO:
+									d = (T)(0);
+									set_zero = true;
+									break;
+								case PAD_EDGE:
+									pos2 = w1 - 1;
+									break;
+								case PAD_REFLECT:
+									pos2 = (w1 - 1) - (pos2 - w1);
+									break;
+								}
+							}
+
+							if (!set_zero)   // m_data = new T[m_width * m_height * m_depth];    
+							{
+								summ += (double)m_data[pos1 * w1 + pos2] * (double)convm.m_data[i1 * w2 + j1];
+
+							}
+
+						}
+					}
+					outm.m_data[i * w1 + j] = (T)summ;
+				}
+			}
+
+			return 0;
+		}
 
 	};
 

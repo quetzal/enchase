@@ -60,6 +60,38 @@ namespace enchase
 		}
 	}
 
+	void Surface::process(MatrixF* matrix)
+	{
+		edgeProcess(matrix, edgeType);
+
+		if (invert)
+		{
+			printf("invert\n");
+			*matrix = 1 - *matrix;
+		}
+
+		if (useBlur)
+		{
+			blur(matrix, blurTimes);
+		}
+
+		if (convertType == 1)
+		{
+			transparencyConvert(matrix, baseHeight, maxHeight, 25);
+		}
+		else
+		{
+			normalConvert(matrix, baseHeight, maxHeight);
+		}
+	}
+
+	MatrixF* Surface::matrix()
+	{
+		MatrixF* m = produce();
+		if (m) process(m);
+		return m;
+	}
+
 	MatrixF* Surface::matrix(ccglobal::Tracer* tracer)
 	{
 		MatrixF* m = produce();

@@ -15,10 +15,13 @@ namespace enchase
 		virtual ~Surface();
 
 		MatrixF* matrix(ccglobal::Tracer* tracer);
+		MatrixF* matrix();
+
 		virtual MatrixF* produce() = 0;
 		void setIndex(int index);
 		int index();
 	protected:
+		void process(MatrixF* matrix);
 		void process(MatrixF* matrix, ccglobal::Tracer* tracer);
 	public:
 		int convertType;
@@ -30,7 +33,7 @@ namespace enchase
 		EdgeType edgeType;
 
 		int useIndex;
-
+		int blurTimes;
 		int colorSegment;
 	};
 

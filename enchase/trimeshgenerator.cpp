@@ -3,7 +3,7 @@
 #include "enchaser.h"
 #include "texturegroup.h"
 #include "imagematrixfsource.h"
-#include "mmesh/trimesh/trimeshutil.h"
+//#include "mmesh/trimesh/trimeshutil.h"
 
 namespace enchase
 {
@@ -16,8 +16,8 @@ namespace enchase
 		if (!surface || !mat)
 			return nullptr;
 
-		if(ball && (float)mat->width()/(float)mat->height() > 1.5f)
-			mmesh::convertUV2Equ(input);
+		//if(ball && (float)mat->width()/(float)mat->height() > 1.5f)
+		//	mmesh::convertUV2Equ(input);
 
 		enchase::Mapper mapper;
 		enchase::Enchaser enchaser;

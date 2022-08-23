@@ -1,7 +1,7 @@
 #ifndef ENCHASE_TRIMESHGENERATOR_1620897704388_H
 #define ENCHASE_TRIMESHGENERATOR_1620897704388_H
 #include "trimesh2/TriMesh.h"
-#include "mmesh/enchase/surface.h"
+#include "surface.h"
 
 namespace enchase
 {
