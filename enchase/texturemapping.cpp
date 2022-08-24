@@ -129,7 +129,7 @@ namespace enchase
 				mesh->normals.at(i) = trimesh::normalized(mesh->vertices.at(i));
 		}
 
-		trimesh::TriMesh* meshOut = enchaseGenerate(mesh, SurfacePtr(m_surface), true);
+		trimesh::TriMesh* meshOut = enchaseGenerate(mesh, SurfacePtr(m_surface));
 		
 		return meshOut;
 	}

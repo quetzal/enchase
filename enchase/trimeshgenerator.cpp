@@ -7,7 +7,7 @@
 
 namespace enchase
 {
-	trimesh::TriMesh* enchaseGenerate(trimesh::TriMesh* input, SurfacePtr surface, bool ball)
+	trimesh::TriMesh* enchaseGenerate(trimesh::TriMesh* input, SurfacePtr surface)
 	{
 		if (!input || input->cornerareas.size() == 0)
 			return nullptr;
@@ -17,7 +17,7 @@ namespace enchase
 			return nullptr;
 
 		//if(ball && (float)mat->width()/(float)mat->height() > 1.5f)
-		//	mmesh::convertUV2Equ(input);
+		//	mmesh::convertUV2Equ(input);   /////////$$$$$$$$$$$$$$$$$$$$$$$$/////////////////////////
 
 		enchase::Mapper mapper;
 		enchase::Enchaser enchaser;
