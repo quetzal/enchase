@@ -6,6 +6,8 @@
 namespace enchase
 {
 	trimesh::TriMesh* enchaseGenerate(trimesh::TriMesh* input, SurfacePtr source);
+
+	void mappingTriMesh(trimesh::TriMesh* input, int type);
 }
 
 #endif // ENCHASE_TRIMESHGENERATOR_1620897704388_H
