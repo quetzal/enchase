@@ -272,7 +272,7 @@ namespace enchase
 			{
 				return false;
 			}
-			if (s < 0 || s > 1 || t < 0 || t > 1)
+			if (isnan(s)|| isnan(t) || s < 0 || s > 1 || t < 0 || t > 1)
 			{
 				return false;
 			}
