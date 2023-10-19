@@ -2,7 +2,7 @@
 #include "blur.h"
 #include <math.h>
  
-#include "trimesh2/Vec.h"
+#include <trimesh2/Vec.h>
 #if _WIN32
 #include <algorithm>
 #endif
