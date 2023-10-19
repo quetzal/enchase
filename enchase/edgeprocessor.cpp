@@ -1,5 +1,6 @@
 #include "edgeprocessor.h"
 #include <vector>
+#include <cstdio>
 
 namespace enchase
 {
